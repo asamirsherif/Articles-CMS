@@ -6,6 +6,9 @@
 
 3- run the app from the root folder!
 
+4- update config/config.php => define('URL', '/'); if your app path is differnet than localhost
+
+
 
 Multi users login:
 
