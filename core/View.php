@@ -17,7 +17,7 @@ class View {
 
             require 'view/layout/navbar.php';
 
-            require 'view/layout/message.php';
+            require 'view/layout/partials/message_toast.php';
 
             require 'view/' . $name . '.php';
 
