@@ -1,5 +1,5 @@
 <?php
 
-    class About_Model extends Model {
+    class AboutModel extends Model {
         
     }
