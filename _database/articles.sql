@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 27, 2022 at 09:55 PM
+-- Generation Time: Jul 27, 2022 at 10:33 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -37,8 +37,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `category_name`) VALUES
-(7, 'Development'),
-(8, 'desgin');
+(1, 'Development'),
+(2, 'desgin');
 
 -- --------------------------------------------------------
 
