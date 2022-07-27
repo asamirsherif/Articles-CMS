@@ -21,7 +21,8 @@
 
         # Rendering the add Page - Only accessible if Admin status
         public function add() {
-            if(Session::get('user')['permission'] == "Admin") { 
+            if(Session::get('user')['permission'] == "Admin" || 
+            Session::get('user')['permission'] == "Editor") { 
                 $data = $this->model->getCategories();
                 $this->view->data = $data;
                 $this->view->render('dashboard/add');
@@ -29,9 +30,6 @@
                 header('Location: ' . URL . 'dashboard');
             }
         }
-
-        
-
 
         // Category Functions ---------------------------------------
 

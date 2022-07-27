@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link " href="<?= URL ?>dashboard/allUserPosts"><span data-feather="file-text"></span>Your Posts</a>
                 </li>
-                <?php if(Session::get('user')['permission'] == "Admin") :?>
+                <?php if(Session::get('user')['permission'] == "Admin" || Session::get('user')['permission'] == "Editor" ) :?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL ?>dashboard/add"><span data-feather="file-text"></span>Add Post</a>
                 </li>
