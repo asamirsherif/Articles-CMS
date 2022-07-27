@@ -1,17 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display|Roboto:400,700,900");
 body {
   padding-top: 5rem;
-  font-family: 'roboto', sans-serif;
+  background-color:#3828c5;
+  font-family: 'Playfair', sans-serif;
 }
 
 .alert-success {
+  padding-top: 3rem;
+  margin: auto;
   z-index: 999;
-  width: 90%;
+  width: 50%;
 }
 
 .alert-danger {
+  padding-top: 3rem;
+  margin: auto;
   z-index: 999;
-  width: 90%;
+  width: 50%;
 }
 
 .card-title {
@@ -250,5 +255,25 @@ p {
     -webkit-column-count: 3;
     column-count: 3;
   }
+}
+
+#title {
+  text-decoration: none;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
 }
 /*# sourceMappingURL=main.css.map */

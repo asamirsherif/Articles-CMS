@@ -9,19 +9,23 @@ class View {
 
         //Check if view has already been rendered
         if (!$this->rendered) {
+            
 
             //Prevent double rendering
             $this->rendered = true;
 
             require 'view/layout/header.php';
 
-            require 'view/layout/navbar.php';
+            if(Session::get('controller_name') !== 'Auth') {
+                
+                require 'view/layout/navbar.php';
+            }
 
             require 'view/layout/partials/message_toast.php';
 
             require 'view/' . $name . '.php';
 
-            if(Session::get('controller_name') !== 'Dashboard') {
+            if(Session::get('controller_name') !== 'Dashboard' && Session::get('controller_name') !== 'Auth') {
                 require 'view/layout/footer.php';
             }
             
