@@ -13,25 +13,25 @@ class View {
             //Prevent double rendering
             $this->rendered = true;
 
-            require 'partial/header.php';
+            require 'view/layout/header.php';
 
-            require 'partial/navbar.php';
+            require 'view/layout/navbar.php';
 
-            require 'partial/message.php';
+            require 'view/layout/message.php';
 
             require 'view/' . $name . '.php';
 
             if(Session::get('controller_name') !== 'Dashboard') {
-                require 'partial/footer.php';
+                require 'view/layout/footer.php';
             }
             
             // Check DEBUG_MODE (config)
             if (DEBUG_MODE) {
                 //Draw Debug-View
-                require 'partial/debug.php';
+                require 'view/layout/debug.php';
             }
             
-            require 'partial/footer_essentials.php';
+            require 'view/layout/footer_essentials.php';
 
         }
 

@@ -14,7 +14,7 @@ class Controller {
 
     public function loadModel() {
 
-        $model_name = get_class($this) . '_Model';
+        $model_name = get_class($this) . 'Model';
         $model_file = 'model/' . $model_name . '.php';
 
         // Load a Model-File only if it exists
@@ -25,7 +25,5 @@ class Controller {
 
     }
 
-    //TODO make function index abstract
-    //abstract function index();
 
 }
