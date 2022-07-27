@@ -53,7 +53,7 @@
             return false;
         }
 
-        // -- Categories functions
+        // -- Categories functions ---------------------
         public function getCategories() {
             $sql = "SELECT * FROM category WHERE 1";
             $obj = $this->db->prepare($sql);
@@ -134,6 +134,8 @@
             return $result;
         }
 
+        // permissions ---------------------------
+
         public function updatePermission($permission, $userEmail) {
             $sql = "UPDATE `user` SET permission_id = :permission WHERE email = :email";
 
@@ -144,6 +146,18 @@
                 ":email" => $userEmail
             ));
         }
+
+        public function getAllPermissions() {
+            $sql = "SELECT * FROM user_permission";
+            $obj = $this->db->prepare($sql);
+            $obj->execute();
+
+            $result = $obj->fetchAll(PDO::FETCH_OBJ);
+
+            return $result;
+        }
+
+        // ----------------------------
 
         public function unbanUser($userEmail) {
             $sql = 'UPDATE user SET login_attempts = 0 WHERE email = :email';
@@ -168,7 +182,39 @@
         }
 
 
-        // --------------------------------------------------------------------
+        // File functions ---------------------------------------------------
+
+        public function updateFile($file_id, $file) {
+            $sql = 'UPDATE file SET name=:name, image=:image, thumb=:thumb, size=:size WHERE id=:file_id';
+    
+            $obj = $this->db->prepare($sql);
+    
+            $result = $obj->execute(array(
+                ':file_id' => $file_id,
+                ':name' => $file['name'],
+                ':image' => $file['image'],
+                ':thumb' => $file['thumb'],
+                ':size' => $file['size'],
+            ));
+    
+            // Return result
+            return $result;
+        }
+
+        public function deleteFile($file_id) {
+    
+            $sql = 'DELETE FROM file WHERE id = :file_id';
+    
+            $obj = $this->db->prepare($sql);
+    
+            $result = $obj->execute(array(
+                ':file_id' =>  $file_id
+            ));
+    
+            return $result;
+        }
+
+        // -----------------------------------------------------
 
 
     }
