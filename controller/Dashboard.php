@@ -63,7 +63,7 @@
         }
 
         // --------------------------------------------------------
-        
+
         public function index() {
             if(!(Session::get('user'))) {
                 Header("Location: " . URL . "home");
@@ -71,4 +71,39 @@
                 $this->view();
             }
         }
+
+
+        // User Functions 
+
+        public function allUsers() {
+            $allPermissions = $this->model->getAllPermissions();
+            $allUsers = $this->model->getAllUsers();
+            $this->view->allUsers = $allUsers;
+            $this->view->allPermissions = $allPermissions;
+            $this->view->render('dashboard/allUsers');
+        }
+
+        public function unbanUser() {
+            $userEmail = explode("/", $_GET["url"]);
+            $this->model->unbanUser($userEmail[2]);
+            header("Location: " . URL . "dashboard/allUsers");
+        }
+
+        public function banUser() {
+            $userEmail = explode("/", $_GET["url"]);
+            $this->model->banUser($userEmail[2]);
+            header("Location: " . URL . "dashboard/allUsers");
+        }
+
+        public function updatePermission() {
+            $permission = $_POST['permission_id'];
+            $userEmail = explode("/", $_GET["url"]);
+            $this->model->updatePermission($permission ,$userEmail[2]);
+            header("Location: " . URL . "dashboard/allUsers");
+        }
+
+
+        // -------------------------------------------------------------
+
+        
     }
