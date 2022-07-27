@@ -43,6 +43,27 @@
             }
         }
 
+
+        // Category Functions ---------------------------------------
+
+        
+        public function category() {
+            if(!(Session::get('user'))) {
+                header("Location: " . URL . "home");
+            } else { 
+                $this->view->render('dashboard/category');
+
+            }
+        }
+
+        public function addCategory() {
+            $getCategory = $_POST['category'];
+            $this->model->insertCategory($getCategory);
+            header("Location: " . URL . "dashboard/category");
+        }
+
+        // --------------------------------------------------------
+        
         public function index() {
             if(!(Session::get('user'))) {
                 Header("Location: " . URL . "home");
