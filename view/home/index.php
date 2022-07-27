@@ -4,7 +4,7 @@
     <div class="container">
         <div class="intro-text">
             <h4 class="text-uppercase">Share Knowlegde with Geeks</h4>
-            <div class="intro-heading">Great technology creates focus, joy, and human </br>connection. Find out or Share out how.</div>
+            <div class="intro-heading">Great technology creates focus, joy, and human connection. <br> Find out or Share out how.</div>
             <a class="btn btn-xl text-white text-uppercase" href="<?=URL?>category/showCategory/1">Read More</a><i class="fa fa-angle-right"></i>
         </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="section-heading">What is Geeks Mind</h2>
-                <hr class="dark my-4">
+                <hr class="dark my-4 mx-auto">
                 <p class="text-faded mb-4">is a community of amazing developers We're a place where coders share, stay up-to-date and grow their careers. </p>
             </div>
         </div>
