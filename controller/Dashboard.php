@@ -30,18 +30,7 @@
             }
         }
 
-        /**
-         * View all posts
-         */
-        public function view() {
-            if(!(Session::get('user'))) {
-                Header("Location: " . URL . "home");
-            } else {
-                $posts = $this->model->getPosts();
-                $this->view->posts = $posts;
-                $this->view->render('dashboard/view');
-            }
-        }
+        
 
 
         // Category Functions ---------------------------------------
@@ -162,5 +151,79 @@
         }
 
         // ----------------------------------------------------------------------------
+
+        // POST VIEW CRUD functions
+
+        /**
+         * View all posts
+         */
+        public function view() {
+            if(!(Session::get('user'))) {
+                Header("Location: " . URL . "home");
+            } else {
+                $posts = $this->model->getPosts();
+                $this->view->posts = $posts;
+                $this->view->render('dashboard/view');
+            }
+        }
+
+        public function edit($id) {
+            if(!(Session::get('user'))) {
+                Header("Location: " . URL . "home");
+            } else {
+                $posts = $this->model->getPostById($id);
+                $this->view->posts = $posts;
+                $this->view->render('dashboard/edit');
+            }
+        }
+
+        public function doEdit($id) {        
+            $post = $_POST;
+            $posts = $this->model->getPostById($id);
+            $post['id'] = $id;
+            $post['header'] = trim($post['header']);
+            $post['content'] = trim($post['content']);
+            $file_id = $_POST['file_id'];
+            $new_foto = $_FILES['new_foto'];
+
+            if(empty($post['header']) || empty($post['content'])) {
+                $this->view->post_err = 'Please fill out the complete form';
+                return $this->edit();
+            }
+
+            if (!$new_foto['error']) {
+                $uploadedFile = File::uploadImg($new_foto);
+
+                File::delete($posts[0]->thumb);
+                File::delete($posts[0]->image);
+
+                $this->model->updateFile($file_id, $uploadedFile);
+            }
+
+            $this->view->post = $post;
+            $this->model->updatePost($post);
+            Message::add('Post updated');
+            
+            header('Location: ' . URL . 'home');
+        }
+
+        public function delete($id) {
+            $post = $this->model->getPostById($id);
+            $file_id = $post[0]->file_id;
+            
+            $this->model->deleteFile($file_id);
+            $this->model->deletePost($id);
+            File::delete($post[0]->image);
+            File::delete($post[0]->thumb);
+
+            Message::add('Post deleted', 'danger');
+            header('Location: ' . URL . 'home');
+        }
+
+        public function allUserPosts() {
+            $allPosts = $this->model->getPostsByEmail();
+            $this->view->allPosts = $allPosts;
+            $this->view->render('dashboard/allUserPosts');   
+        }
 
     }

@@ -278,4 +278,102 @@
             return $result1;
         }
         // ----------------------------------------------------------------
+
+        // Posts Functions
+
+        
+        public function getPostById($id) {
+            $sql = "SELECT user.firstname, user.lastname, file.image, file.thumb, category.category_name, posts.*
+            FROM user
+            JOIN posts
+            ON user.id = posts.user_id
+            JOIN file
+            ON file.id = posts.file_id
+            JOIN category
+            ON category.id = posts.category_id WHERE posts.id = :id";
+
+            $obj = $this->db->prepare($sql);
+    
+            $obj->execute(array(
+                ":id" => $id
+            ));
+            
+            if($obj->rowCount() > 0) {
+                $data = $obj->fetchAll(PDO::FETCH_OBJ);
+                return $data;
+            }
+        
+            return false;
+        }
+
+        public function getFileById($id) {
+            $sql = "SELECT * FROM file WHERE id = :id";
+            $obj = $this->db->prepare($sql);
+
+            $obj->execute(array(
+                ":id" => $id
+            ));
+
+            if($obj->rowCount() > 0) {
+                $data = $obj->fetchAll(PDO::FETCH_OBJ);
+                return $data;
+            }
+        
+            return false;
+        }
+
+        public function getPostsByEmail() {
+            $sql = 'SELECT user.firstname, user.lastname, file.image, file.thumb, category.category_name, posts.*
+                    FROM user
+                    JOIN posts
+                    ON user.id = posts.user_id
+                    JOIN file
+                    ON file.id = posts.file_id
+                    JOIN category
+                    ON category.id = posts.category_id
+                    WHERE user.email = :email';
+            
+            $obj = $this->db->prepare($sql);
+            
+            $obj->execute(array(
+                ":email" => Session::get('user')['email']
+            ));
+            
+            if ($obj->rowCount() > 0) {
+                $data = $obj->fetchAll(PDO::FETCH_OBJ);
+                return $data;
+            }
+    
+            return false;
+        }
+
+        
+
+        public function updatePost($data) {
+            $sql = "UPDATE posts SET header = :header, content = :content WHERE id = :id";
+    
+            $obj = $this->db->prepare($sql);
+    
+            $obj->execute(array(
+                ":id" => $data["id"],
+                ":header" => $data["header"],
+                ":content" => $data["content"]
+            ));
+        }
+    
+
+
+        public function deletePost($id) {
+
+            $sql = 'DELETE FROM posts WHERE id = :id LIMIT 1;';
+    
+            $obj = $this->db->prepare($sql);
+    
+            $result = $obj->execute(array(
+                ':id' => $id
+            ));
+    
+            return $result;
+        }
+        
     }
