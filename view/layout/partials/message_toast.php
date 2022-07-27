@@ -8,8 +8,8 @@
 <div class="container">
         <div class="alert alert-<?= $value['class'] ?> position-fixed" data-time="<?= $value['time'] ?>" data-duration="<?= $value['duration'] ?>"><?= $value['text'] ?>
 
-            <button type="button" href="<?=URL?>?deleteMessage=<?= $key ?>" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+            <button type="button" class="close">
+                <a href="?deleteMessage=<?= $key ?>" aria-hidden="true">&times;</a>
             </button>
 
         </div>
