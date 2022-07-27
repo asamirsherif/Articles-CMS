@@ -1,2 +1,16 @@
-# Articles-CMS
-Simple Articles CMS 
+# Articles Content Mangment System
+
+**1 - add db configs in configs/config.php**
+
+2- import _database/articles.sql in your mysql server
+
+3- run the app from the root folder!
+
+
+Multi users login:
+
+1- **Admin Permissions** `admin@demo.com 12345678`
+
+2- **Editor Permissions** `editor@demo.com 12345678`
+
+3 - **Guest Permissions** `guest@demo.com 12345678`
