@@ -1,4 +1,5 @@
-# Articles Content Mangment System
+# Articles Content Mangment System in Pure PHP 
+## Using MVC desgin pattern
 
 **1 - add db configs in configs/config.php**
 
