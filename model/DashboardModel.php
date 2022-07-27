@@ -134,6 +134,40 @@
             return $result;
         }
 
+        public function getUserById($id) {
+            $sql = 'SELECT u.id, u.firstname, u.lastname, u.email, u.login_attempts, u.permission_id, u.file_id, file.image, file.thumb, p.permission
+            FROM user as u
+            LEFT JOIN file ON file.id = u.file_id
+            LEFT JOIN user_permission AS p ON u.permission_id = p.id
+            WHERE u.id = :id';
+            
+            $obj = $this->db->prepare($sql);
+            
+            $obj->execute(array(
+                ":id" => $id
+            ));
+            
+            if ($obj->rowCount() > 0) {
+                $data = $obj->fetch(PDO::FETCH_ASSOC);
+                return $data;
+            }
+    
+            return false;
+        }
+    
+        public function getUserFromEmail($email) {
+            $sql = 'SELECT user.*, user_permission.permission FROM user LEFT JOIN user_permission ON permission_id = user_permission.id WHERE email = :email LIMIT 1';
+            $obj = $this->db->prepare($sql);
+    
+            $obj->execute(array(
+                'email' => $email
+            ));
+    
+            $result = $obj->fetch(PDO::FETCH_ASSOC);
+    
+            return $result;
+        }
+
         // permissions ---------------------------
 
         public function updatePermission($permission, $userEmail) {
