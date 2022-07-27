@@ -3,8 +3,8 @@
 <header class="masthead">
     <div class="container">
         <div class="intro-text">
-            <h4 class="text-uppercase">Get started with digital mindfulness</h4>
-            <div class="intro-heading">Great technology creates focus, joy, and human </br>connection. Find out how.</div>
+            <h4 class="text-uppercase">Share Knowlegde with Geeks</h4>
+            <div class="intro-heading">Great technology creates focus, joy, and human </br>connection. Find out or Share out how.</div>
             <a class="btn btn-xl text-white text-uppercase" href="<?=URL?>category/showCategory/1">Read More</a><i class="fa fa-angle-right"></i>
         </div>
     </div>
@@ -14,9 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-heading">What is Tale Of Mind?</h2>
+                <h2 class="section-heading">What is Geeks Mind</h2>
                 <hr class="dark my-4">
-                <p class="text-faded mb-4">Tale of Mind is for the passionate, the fearless, and the dreamers who believe. For those who are smart, curious, and conscious, with an open mind, a love for learning, and a deep desire to live a brilliant and vibrant life.</p>
+                <p class="text-faded mb-4">is a community of amazing developers We're a place where coders share, stay up-to-date and grow their careers. </p>
             </div>
         </div>
     </div>
@@ -29,7 +29,9 @@
 <section>
     <div class="card-columns">
 
-<?php foreach($this->post as $item) : ?>
+<?php 
+    if($this->post){
+    foreach($this->post as $item) : ?>
         <div class="card d-none">
             <a href="<?= URL; ?>category/show/<?= $item->id; ?>">
                 <img class="card-img-top" src="<?= $item->image ?>" alt="Card image cap">
@@ -52,8 +54,10 @@
             </div>
         </div>
     
-<?php endforeach; ?>
+<?php endforeach; } else {?>
+    <h3 class='mx-auto'> Sorry No articles yet, register and add yours </h3>
     </div>
+<?php } ?>
 
 
     <!-- Pagination start -->
