@@ -17,3 +17,7 @@ define('URL', '');
 define('SITENAME', 'Geeks Mind');
 //---------------------------------------------------------
 define('DEFAULT_IMG', URL . 'public/img/default.jpg');
+//---------------------------------------------------------
+// Set values for Pagination 
+define('ACTIVE_PAGE', 0);
+define('CARDS_PER_PAGE', 6);
