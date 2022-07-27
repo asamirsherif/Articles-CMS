@@ -53,6 +53,7 @@
             return false;
         }
 
+        // -- Categories functions
         public function getCategories() {
             $sql = "SELECT * FROM category WHERE 1";
             $obj = $this->db->prepare($sql);
@@ -66,4 +67,24 @@
     
             return false;
         }
+
+        public function insertCategory($categoryName) {
+            $sql = "INSERT INTO category(category_name) VALUES (:category_name)";
+            $obj = $this->db->prepare($sql);
+    
+            $obj->execute(array(
+                ":category_name" => $categoryName
+            ));
+    
+            if($obj->rowCount() > 0) {
+                $data = $obj->fetchAll(PDO::FETCH_OBJ);
+                return $data;
+            }
+    
+            return false;
+        }
+
+        //---------------------------------------
+
+        
     }
