@@ -46,14 +46,14 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
             </div>
 
-            <div class="form-group inputDnD">
+            <div class="form-group">
                 <label for="title">Current Image:</label>
                 <div>
                     <img class="" src="<?= URL . $post->thumb ?>" alt="Card image cap">
                 </div>
             </div>
 
-            <div class="form-group inputDnD">
+            <div class="form-group">
                 <label for="title">Upload new Image:</label>
                 <input type="file" class="form-control-file text-upload font-weight-bold" name="new_foto" id="inputFile" onchange="readUrl(this)" data-title="Click or Drag and drop a file">
             </div>
