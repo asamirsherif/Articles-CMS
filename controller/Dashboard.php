@@ -105,5 +105,62 @@
 
         // -------------------------------------------------------------
 
+
+        //  USER PROFILE FUNCTIONS 
+
+        public function editProfile() {
+            if(!(Session::get('user'))) {
+                Header("Location: " . URL . "home");
+            } else { 
+                $userEmail = Session::get('user')['email'];
+                $userImgThumb = Session::get('user')['thumb'];
         
+                $userData = $this->model->getUserFromEmail($userEmail);
+                $this->view->userData = $userData;
+                $this->view->userImg = $userImgThumb;
+                $this->view->render('dashboard/editProfile');
+            }
+        }
+
+        public function doUpdateUser() {
+            $post = $_POST;
+            $post_firstname = $_POST['firstname'];
+            $user = Session::get('user');
+            $user_id = $user['id'];
+            $post_lastname = $_POST['lastname'];
+            $post_email = $_POST['email'];
+            $post_password = $_POST['password'];
+            $file_id = $_POST['file_id'];
+            $new_foto = $_FILES['new_foto'];
+            $userEmail = $user['email'];
+            $userData = $this->model->getUserFromEmail($userEmail);
+            $this->view->userData = $userData;
+
+            if (!$new_foto['error']) {
+                
+                $uploadedFile = File::uploadImg($new_foto);
+                
+                if(!empty($user['image'])) {
+                    File::delete($user['thumb']);
+                    File::delete($user['image']);
+                }
+                
+                if($user['file_id'] === NULL) {
+                    $this->model->uploadUserImage($user_id, $uploadedFile);
+                } else {
+                    $this->model->updateFile($file_id, $uploadedFile);
+                }   
+            }
+            
+            $this->view->post = $post;
+            $this->model->editProfile($user_id, $post_firstname, $post_lastname, $post_email, $post_password);
+            $updatedUser = $this->model->getUserById($user['id']);
+            // Debug::add($updatedUser);
+            Session::set("user", $updatedUser); 
+            // $this->view->render('dashboard/editProfile');
+            header('Location: ' . URL . 'dashboard/editProfile');        
+        }
+
+        // ----------------------------------------------------------------------------
+
     }

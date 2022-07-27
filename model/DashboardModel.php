@@ -216,5 +216,32 @@
 
         // -----------------------------------------------------
 
+        // Profile ---------------------------------------------
+        public function editProfile($user_id, $post_firstname, $post_lastname, $post_email, $post_password) {
 
+            $sql = "UPDATE user SET firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id";
+            
+            $executeArray = array(
+                ":firstname" => $post_firstname,
+                ":lastname" => $post_lastname,
+                ":email" => $post_email,
+                ":id" => $user_id
+            );
+
+            if(!empty($post_password)) {
+                $sql = "UPDATE user SET firstname = :firstname, lastname = :lastname, email = :email, password = :password WHERE id = :id";
+                $password = $post_password;
+                $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+                $post_password = $hashPassword;
+
+                $executeArray[':password'] = $post_password;
+            }
+            
+            $obj = $this->db->prepare($sql);
+
+            $result1 = $obj->execute($executeArray);
+    
+            return $result1;
+        }
+        // ----------------------------------------------------------------
     }
