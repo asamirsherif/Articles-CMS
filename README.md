@@ -3,13 +3,15 @@
 
 ## Installation
 
-**1 - add db configs in configs/config.php**
+**1 - Add your db config in configs/config.php**
 
-**2- import _database/articles.sql in your mysql server**
+**2- update config/config.php => define('URL', '/'); if your app root path is differnet than http://localhost**
 
-**3- run the app from the root folder!**
+**3- import _database/articles.sql in your mysql server**
 
-**4- update config/config.php => define('URL', '/'); if your app path is differnet than localhost/**
+**4- run the app from the root folder!**
+
+
 
 
 
